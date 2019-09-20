@@ -1,3 +1,6 @@
+<!--This is the main page it has been used: a Grid sort by ant design
+  by using nzPush, with col-18 col-pull-6, for the routing part
+  and nzPull with, col-6 and col-pull-18, for the menu part-->
 <div>
   <div nz-col [nzSpan]="18" [nzPush]="6">
     col-18 col-push-6
@@ -5,14 +8,14 @@
   </div>
   <div class="menu-div" nz-col [nzSpan]="6" [nzPull]="18">
     <!-- Insert logo taurus -->
-    <br />
-    <br />
+    <br/>
+    <br/>
     <ul nz-menu nzMode="inline" style="height:100%;" [nzTheme]="'dark'">
-      <li nz-menu-item nz-tooltip nzPlacement="right" nzTitle="Isuee Token">
+      <li nz-menu-item nz-tooltip nzPlacement="right" nzTitle="Isuee Token" routerLink="/">
         <i nz-icon nzType="plus"></i>
         <span>Isuee Token</span>
       </li>
-      <li nz-submenu nzTitle="Token List" nzIcon="unordered-list">
+      <li nz-submenu nzTitle="Token List" nzIcon="unordered-list" routerLink="/token-list" routerLinkActive="active">
         <ul>
           <li nz-menu-item>Option 5</li>
           <li nz-menu-item>Option 6</li>

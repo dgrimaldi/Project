@@ -11,8 +11,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { HomeComponent } from './home/home.component';
+import {RouterModule, Routes} from "@angular/router";
 
 registerLocaleData(en);
+
+const appRoutes: Routes = [
+  {path: 'token-list', component: HomeComponent}
+];
 
 @NgModule({
   declarations: [
@@ -26,7 +31,10 @@ registerLocaleData(en);
     NgZorroAntdModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RouterModule.forRoot(
+      appRoutes
+    )
   ],
   providers: [{ provide: NZ_I18N, useValue: en_GB }],
   bootstrap: [AppComponent]
