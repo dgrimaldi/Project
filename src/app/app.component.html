@@ -3,25 +3,24 @@
   and nzPull with, col-6 and col-pull-18, for the menu part-->
 <div>
   <div nz-col [nzSpan]="18" [nzPush]="6">
-    col-18 col-push-6
     <router-outlet></router-outlet>
   </div>
-  <div class="menu-div" nz-col [nzSpan]="6" [nzPull]="18">
-    <!-- Insert logo taurus -->
-    <br/>
-    <br/>
-    <ul nz-menu nzMode="inline" style="height:100%;" [nzTheme]="'dark'">
-      <li nz-menu-item nz-tooltip nzPlacement="right" nzTitle="Isuee Token" routerLink="/">
-        <i nz-icon nzType="plus"></i>
-        <span>Isuee Token</span>
-      </li>
-      <li nz-submenu nzTitle="Token List" nzIcon="unordered-list" routerLink="/token-list" routerLinkActive="active">
-        <ul>
-          <li nz-menu-item>Option 5</li>
-          <li nz-menu-item>Option 6</li>
-        </ul>
-      </li>
-    </ul>
+    <div class="menu-div" nz-col [nzSpan]="6" [nzPull]="18">
+      <!-- Insert logo taurus -->
+      <br/>
+      <br/>
+      <ul nz-menu nzMode="inline" style="height:100%; background-color: slateblue" [nzTheme]="">
+        <li nz-menu-item nz-tooltip nzPlacement="right" nzTitle="Isuee Token" routerLink="/">
+          <i nz-icon nzType="plus"></i>
+          <span>Isuee Token</span>
+        </li>
+        <li nz-submenu nzTitle="Token List" nzIcon="unordered-list" routerLink="/token-list" routerLinkActive="active">
+          <ul>
+            <li nz-menu-item>Option 5</li>
+            <li nz-menu-item>Option 6</li>
+          </ul>
+        </li>
+      </ul>
 
-  </div>
+    </div>
 </div>
