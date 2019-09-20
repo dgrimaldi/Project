@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TOKENS} from "../tokens/mock-tokens";
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   dataToken: any;
+  tokens= TOKENS;
 
   constructor() { }
 

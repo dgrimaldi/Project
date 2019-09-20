@@ -1,28 +1,51 @@
 <nz-layout>
   <nz-header>
-    <h1 style="color: white">Token List</h1>
+    <h1 style="color: white; padding-left: 1%">Token List</h1>
   </nz-header>
-<nz-layout>
-  <nz-content>
-    <nz-input-group [nzPrefix]="prefixIconSearch">
-      <input type="text" nz-input placeholder="Contract name or address or ticker">
-    </nz-input-group>
-    <ng-template #prefixIconSearch>
-      <i nz-icon nzType="search"></i>
-    </ng-template>
-  </nz-content>
+  <nz-header>
+    <div nz-row style="padding-left:1%">
+      <div nz-col [nzSpan]="7" [nzPush]="17">
+        <button style="margin-left: 8%" nz-button nzType="primary">Isuee Token</button>
+        <button style="margin-left: 8%;" nz-button nzType="dashed"><i nz-icon nzType="download"></i>Export to CSV
+        </button>
+      </div>
+      <div nz-col [nzSpan]="17" [nzPull]="7">
+        <nz-input-group [nzPrefix]="prefixIconSearch">
+          <input type="text" nz-input placeholder="Contract name or address or ticker">
+        </nz-input-group>
+        <ng-template #prefixIconSearch>
+          <i nz-icon nzType="search"></i>
+        </ng-template>
+      </div>
+    </div>
+  </nz-header>
+  <nz-layout>
+    <nz-content>
+      <nz-table #tokenListTable [nzData]="dataToken"></nz-table>
+      <thead>
+      <tr>
+        <th>Token Name</th>
+        <th>Token ticker</th>
+        <th>Total supply</th>
+        <th>Creation date</th>
+        <th>Issuer name</th>
+        <th>Template</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let token of tokens">
+        <td>{{token.name}}</td>
+        <td>{{token.ticker}}</td>
+        <td>{{token.totalSupply}}</td>
+        <td>{{token.creationDate}}</td>
+        <td>{{token.issuerName}}</td>
+        <td>{{token.template}}</td>
+      </tr>
+      </tbody>
+    </nz-content>
     <nz-sider>
-      <button nz-button nzType="primary">Isuee Token</button>
-      <button nz-button nzType="dashed"><i nz-icon nzType="download"></i>Export to CSV</button>
+      <i nz-icon nzType="delete" nzTheme="outline"></i>
     </nz-sider>
-</nz-layout>
-<nz-layout>
-  <nz-content>
-    <nz-table #tokenListTable [nzData]="dataToken"></nz-table>
-  </nz-content>
-    <nz-sider>
-      <i nz-icon nzType="trash"></i>
-    </nz-sider>
-</nz-layout>
+  </nz-layout>
 </nz-layout>
 
