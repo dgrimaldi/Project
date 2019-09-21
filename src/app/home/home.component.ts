@@ -7,7 +7,6 @@ import {TOKENS} from "../tokens/mock-tokens";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  dataToken: any;
   tokens= TOKENS;
 
   constructor() { }

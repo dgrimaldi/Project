@@ -1,12 +1,12 @@
-<nz-layout>
-  <nz-header>
-    <h1 style="color: white; padding-left: 1%">Token List</h1>
+<nz-layout class="main-layout">
+  <nz-header class="my-header">
+    <h1 class="my-color">Token List</h1>
   </nz-header>
-  <nz-header>
-    <div nz-row style="padding-left:1%">
+  <nz-header class="my-header">
+    <div nz-row>
       <div nz-col [nzSpan]="7" [nzPush]="17">
-        <button style="margin-left: 8%" nz-button nzType="primary">Isuee Token</button>
-        <button style="margin-left: 8%;" nz-button nzType="dashed"><i nz-icon nzType="download"></i>Export to CSV
+        <button class="my-button" nz-button nzType="primary">Isuee Token</button>
+        <button class="my-button" nz-button nzType="dashed"><i nz-icon nzType="download"></i>Export to CSV
         </button>
       </div>
       <div nz-col [nzSpan]="17" [nzPull]="7">
@@ -20,19 +20,21 @@
     </div>
   </nz-header>
   <nz-layout>
-    <nz-content>
-      <nz-table #tokenListTable [nzData]="dataToken"></nz-table>
+
+    <nz-table class="my-color" #tokenListTable [nzData]="tokens" nzTemplateMode="dark">
       <thead>
       <tr>
-        <th>Token Name</th>
-        <th>Token ticker</th>
-        <th>Total supply</th>
-        <th>Creation date</th>
-        <th>Issuer name</th>
-        <th>Template</th>
+        <th nzWidth="10%" >Token Name</th>
+        <th nzWidth="10%" >Token ticker</th>
+        <th nzWidth="10%" >Total supply</th>
+        <th nzWidth="10%" >Creation date</th>
+        <th nzWidth="10%" >Issuer name</th>
+        <th nzWidth="10%" >Template</th>
+        <th ></th>
+        <th nzWidth="80px" class="my-color">Actions</th>
       </tr>
       </thead>
-      <tbody>
+      <tbody class="my-color">
       <tr *ngFor="let token of tokens">
         <td>{{token.name}}</td>
         <td>{{token.ticker}}</td>
@@ -40,12 +42,12 @@
         <td>{{token.creationDate}}</td>
         <td>{{token.issuerName}}</td>
         <td>{{token.template}}</td>
+        <td></td>
+        <td>
+          <i nz-icon nzType="delete" nzTheme="outline"></i>
+        </td>
       </tr>
       </tbody>
-    </nz-content>
-    <nz-sider>
-      <i nz-icon nzType="delete" nzTheme="outline"></i>
-    </nz-sider>
+    </nz-table>
   </nz-layout>
 </nz-layout>
-
