@@ -9,6 +9,7 @@ import {FormBuilder, FormControl, FormGroup, Validator} from "@angular/forms";
 })
 export class IssueModalComponent implements OnInit {
   issueTokenForm: FormGroup;
+  value: string;
 
   constructor(public modalRef: MatDialogRef<IssueModalComponent>) { }
 
@@ -16,7 +17,7 @@ export class IssueModalComponent implements OnInit {
   }
 
 
-  submitForm() {
+  submitForm(value: any) {
     this.modalRef.close();
   }
 }
