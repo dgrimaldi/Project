@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Issue Token</h1>
+<div mat-dialog-content>
+  <form nz-form [formGroup]="issueTokenForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="Name">Name</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid">
+        <input nz-input formControlName="name" id="name">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="Name">Ticker</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid">
+        <input nz-input formControlName="ticker" id="ticker">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row>
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <button nz-button nzType="primary">add</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
