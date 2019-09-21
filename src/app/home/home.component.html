@@ -5,7 +5,7 @@
   <nz-header class="my-header">
     <div nz-row>
       <div nz-col [nzSpan]="7" [nzPush]="17">
-        <button class="my-button" nz-button nzType="primary">Isuee Token</button>
+        <button class="my-button" nz-button nzType="primary" (click)="openModal()" routerLink="issue-token">Isuee Token</button>
         <button class="my-button" nz-button nzType="dashed"><i nz-icon nzType="download"></i>Export to CSV
         </button>
       </div>
