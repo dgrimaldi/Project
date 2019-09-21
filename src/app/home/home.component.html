@@ -24,14 +24,14 @@
     <nz-table class="my-color" #tokenListTable [nzData]="tokens" nzTemplateMode="dark">
       <thead>
       <tr>
-        <th nzWidth="10%" >Token Name</th>
-        <th nzWidth="10%" >Token ticker</th>
-        <th nzWidth="10%" >Total supply</th>
-        <th nzWidth="10%" >Creation date</th>
-        <th nzWidth="10%" >Issuer name</th>
-        <th nzWidth="10%" >Template</th>
-        <th ></th>
-        <th nzWidth="80px" class="my-color">Actions</th>
+        <th nzWidth="10%" class="my-color">Token Name</th>
+        <th nzWidth="10%" class="my-color">Token ticker</th>
+        <th nzWidth="10%" class="my-color">Total supply</th>
+        <th nzWidth="13%" class="my-color">Creation date</th>
+        <th nzWidth="10%" class="my-color">Issuer name</th>
+        <th nzWidth="10%" class="my-color">Template</th>
+        <th class="my-color"></th>
+        <th nzWidth="8%" class="my-color" [nzAlign]='center'>Actions</th>
       </tr>
       </thead>
       <tbody class="my-color">
@@ -43,7 +43,7 @@
         <td>{{token.issuerName}}</td>
         <td>{{token.template}}</td>
         <td></td>
-        <td>
+        <td align="center">
           <i nz-icon nzType="delete" nzTheme="outline"></i>
         </td>
       </tr>
