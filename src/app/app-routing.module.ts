@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: 'token-list', component: HomeComponent,
 
-    //Declaration of the dummy component and
+    // Declaration of the dummy component and
     // configure the Router Module to load it
     // on ‘dialog’ navigation
     children: [{

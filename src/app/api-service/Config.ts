@@ -7,4 +7,5 @@
 export interface Config {
   countriesUrl: string;
   textfile: string;
+  country: string;
 }

@@ -14,6 +14,10 @@ export class IssueModalComponent implements OnInit {
   issueTokenForm: FormGroup;
   private token: Token;
   private config: Config;
+  headers: string[];
+  private conutries: string[];
+  private error: any;
+
 
   constructor(public modalRef: MatDialogRef<IssueModalComponent>,
               private formBuider: FormBuilder,
@@ -35,8 +39,26 @@ export class IssueModalComponent implements OnInit {
     this.apiService.getConfig()
       .subscribe(
         (data: Config) => this.config = {...data},
-        //error => this.error = error
+        error => this.error = error
       );
+  }
+
+  showConfigResponse() {
+    this.apiService.getConfigResponse()
+    // resp is of type `HttpResponse<Config>`
+      .subscribe(resp => {
+        console.log(resp.body['name'] +' '+resp+' '+resp.headers);
+
+
+        // display its headers
+        const keys = resp.headers.keys();
+        this.headers = keys.map(key =>
+          `${key}: ${resp.headers.get(key)}`);
+console.log(this.headers)
+        // access the body directly, which is typed as `Config`.
+        this.config = { ... resp.body };
+      });
+
   }
 
 
