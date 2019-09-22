@@ -5,6 +5,7 @@
  */
 import {Injectable} from '@angular/core';
 import {TOKENS} from "../tokens/mock-tokens";
+import {Token} from "../tokens/token";
 
 @Injectable({
   // we declare that this service should be create
@@ -17,5 +18,8 @@ export class TokenService {
 
   getTokens() {
     return TOKENS;
+  }
+  addToken(token: Token) {
+    TOKENS.push(token);
   }
 }

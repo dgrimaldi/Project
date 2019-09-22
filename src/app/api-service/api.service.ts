@@ -8,7 +8,7 @@ import {Observable, throwError} from "rxjs/index";
   providedIn: 'root'
 })
 export class ApiService {
-  private countryUrl = 'https://restcountries.eu/rest/v2/regionalbloc/eu';
+  private countryUrl = 'https://restcountries.eu/rest/v2/all';
 
   constructor(private http: HttpClient) {
   }

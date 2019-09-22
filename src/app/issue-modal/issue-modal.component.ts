@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import {Token} from "../tokens/token";
 import {Country} from "../api-service/country";
 import {ApiService} from "../api-service/api.service";
+import {TokenService} from "../tokens-service/token.service";
 
 @Component({
   selector: 'app-issue-modal',
@@ -21,17 +22,19 @@ export class IssueModalComponent implements OnInit {
 
   constructor(public modalRef: MatDialogRef<IssueModalComponent>,
               private formBuider: FormBuilder,
-              private apiService: ApiService) {
+              private apiService: ApiService,
+              private tokenService: TokenService) {
   }
 
   ngOnInit() {
+    this.showCountries();
     this.issueTokenForm = this.formBuider.group({
-      name: [null, [Validators.email, Validators.required]],
+      name: [null, [ Validators.required]],
       ticker: [null, [Validators.required]],
       supply: [null, [Validators.required]], //this.confirmationValidator]],
       issuer: [null, [Validators.required]],
       template: ['ERC20'],
-      country: ['IT']
+      country: [null, [Validators.required]]
     });
   }
 
@@ -44,11 +47,20 @@ export class IssueModalComponent implements OnInit {
   }
 
 
-  submitForm() {
+  submitForm(data) {
     for (const i in this.issueTokenForm.controls) {
       this.issueTokenForm.controls[i].markAsDirty();
       this.issueTokenForm.controls[i].updateValueAndValidity();
     }
-    // this.modalRef.close();
+    this.token = new Token(
+      data.name,
+      data.ticker,
+      data.supply,
+      '',
+      data.issuerName,
+      data.Template
+    )
+    this.tokenService.addToken(this.token);
+    this.modalRef.close();
   }
 }

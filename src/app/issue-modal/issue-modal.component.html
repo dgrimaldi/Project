@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Issue Token</h1>
 <div mat-dialog-content style="margin: 0 2% 0 2%;">
 
-  <form nz-form [formGroup]="issueTokenForm" (ngSubmit)="submitForm()">
+  <form nz-form [formGroup]="issueTokenForm" (ngSubmit)="submitForm(issueTokenForm.value)">
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">Name</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid">
@@ -44,7 +44,8 @@
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="country">Country</nz-form-label>
       <nz-form-label [nzSm]="14" [nzXs]="24">
         <nz-select formControlName="country">
-          <nz-option nzLabel="IT" nzValue="IT"></nz-option>
+          <nz-option *ngFor="let country of countries" nzLabel="{{country.name}} - {{country.alpha2Code}}"
+                     nzValue="{{country.name}} - {{country.alpha2Code}}"></nz-option>
         </nz-select>
       </nz-form-label>
     </nz-form-item>
@@ -54,9 +55,5 @@
         <button nz-button nzType="primary">Register</button>
       </nz-form-control>
     </nz-form-item>
-
   </form>
-  <button (click)="showCountries()">show</button>
-  <li *ngFor="let country of countries">{{country.name}}</li>
-
 </div>
