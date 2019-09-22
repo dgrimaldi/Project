@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
-import {Config} from "./Config";
+import {Country} from "./Country";
 import {catchError, retry} from "rxjs/operators";
 import {Observable, throwError} from "rxjs/index";
 
@@ -13,18 +13,18 @@ export class ApiService {
   constructor(private http: HttpClient) {
   }
 
-  getConfig() {
-    return this.http.get<Config>(this.configUrl)
+  getCountries() {
+    return this.http.get<Country>(this.configUrl)
       .pipe(
         retry(3),
         catchError(this.handleError)
       );
   }
 
-  getConfigResponse(): Observable<HttpResponse<Config>> {
-    console.log(this.http.get<Config>(
+  getConfigResponse(): Observable<HttpResponse<Country>> {
+    console.log(this.http.get<Country>(
       this.configUrl, { observe: 'response' }));
-    return this.http.get<Config>(
+    return this.http.get<Country>(
       this.configUrl, { observe: 'response' });
   }
 

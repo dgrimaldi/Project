@@ -4,8 +4,7 @@
  * automatically converted to an instance of a class
  */
 
-export interface Config {
-  countriesUrl: string;
-  textfile: string;
-  country: string;
+export interface Country {
+  name: string;
+  alpha2Code: string;
 }

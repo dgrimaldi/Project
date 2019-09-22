@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialogRef} from "@angular/material";
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {Token} from "../tokens/token";
-import {Config} from "../api-service/Config";
+import {Country} from "../api-service/Country";
 import {ApiService} from "../api-service/api.service";
 
 @Component({
@@ -13,9 +13,8 @@ import {ApiService} from "../api-service/api.service";
 export class IssueModalComponent implements OnInit {
   issueTokenForm: FormGroup;
   private token: Token;
-  private config: Config;
   headers: string[];
-  private conutries: string[];
+  private country: Country;
   private error: any;
 
 
@@ -36,27 +35,25 @@ export class IssueModalComponent implements OnInit {
   }
 
   showConfig(){
-    this.apiService.getConfig()
+    this.apiService.getCountries()
       .subscribe(
-        (data: Config) => this.config = {...data},
+        (data: Country) => this.country = {...data},
         error => this.error = error
       );
   }
 
   showConfigResponse() {
     this.apiService.getConfigResponse()
-    // resp is of type `HttpResponse<Config>`
+    // resp is of type `HttpResponse<Country>`
       .subscribe(resp => {
-        console.log(resp.body['name'] +' '+resp+' '+resp.headers);
-
 
         // display its headers
         const keys = resp.headers.keys();
         this.headers = keys.map(key =>
           `${key}: ${resp.headers.get(key)}`);
-console.log(this.headers)
-        // access the body directly, which is typed as `Config`.
-        this.config = { ... resp.body };
+
+        // access the body directly, which is typed as `Country`.
+        this.country = { ... resp.body };
       });
 
   }
