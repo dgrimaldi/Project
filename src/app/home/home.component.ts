@@ -50,4 +50,7 @@ export class HomeComponent implements OnInit {
     });
   };
 
+  removeToken(number: number) {
+    this.tokenService.removeToken(number);
+  }
 }

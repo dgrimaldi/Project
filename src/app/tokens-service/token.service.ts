@@ -15,6 +15,7 @@ import {Token} from "../tokens/token";
 })
 export class TokenService {
   private nextId: number;
+
   constructor() {
     let tokens = this.getTokens();
     let tokensLength = tokens.length

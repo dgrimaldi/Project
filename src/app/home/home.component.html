@@ -5,7 +5,9 @@
   <nz-header class="my-header">
     <div nz-row>
       <div nz-col [nzSpan]="7" [nzPush]="17">
-        <button class="my-button" nz-button nzType="primary" (click)="openModal()" routerLink="issue-token">Isuee Token</button>
+        <button class="my-button" nz-button nzType="primary" (click)="openModal()" routerLink="issue-token">Isuee
+          Token
+        </button>
         <button class="my-button" nz-button nzType="dashed"><i nz-icon nzType="download"></i>Export to CSV
         </button>
       </div>
@@ -35,7 +37,7 @@
       </tr>
       </thead>
       <tbody class="my-color">
-      <tr *ngFor="let token of tokens">
+      <tr *ngFor="let token of tokens; let i  = index">
         <td>{{token.name}}</td>
         <td>{{token.ticker}}</td>
         <td>{{token.totalSupply}}</td>
@@ -44,7 +46,9 @@
         <td>{{token.template}}</td>
         <td></td>
         <td align="center">
-          <button nz-icon nzType="delete" nzTheme="outline"></button>
+          <a (click)="removeToken(i+1)">
+            <i nz-icon nzType="delete" nzTheme="outline"></i>
+          </a>
         </td>
       </tr>
       </tbody>
