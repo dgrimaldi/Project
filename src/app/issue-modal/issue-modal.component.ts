@@ -17,6 +17,7 @@ export class IssueModalComponent implements OnInit {
   private countries: Country[];
   private error: any;
   private isValid = true;
+  private months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Set', 'Oct', 'Nov', 'Dec'];
 
 
   constructor(public modalRef: MatDialogRef<IssueModalComponent>,
@@ -54,17 +55,25 @@ export class IssueModalComponent implements OnInit {
         this.isValid = false;
       }
     }
+    var dateOBJ = new Date();
     if (this.isValid) {
+      for (const i in this.months) {
+        console.log(dateOBJ.getMonth());
+        if (dateOBJ.getMonth() == i) {
+          var month = this.months[i];
+        }
+      }
       this.token = new Token(
         data.name,
         data.ticker,
         data.supply,
-        '',
+        dateOBJ.getDay() + ' ' + month + ' ' + dateOBJ.getUTCFullYear(),
         data.issuer,
         data.template
       )
       this.tokenService.addToken(this.token);
       this.modalRef.close();
     }
+
   }
 }
