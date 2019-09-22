@@ -21,14 +21,14 @@ export class TokenService {
     if (tokensLength == 0){
       this.nextId = 0;
     } else {
-      let maxId = tokens[tokensLength - 1].id;
+      let maxId = tokens[tokensLength -1].id;
       this.nextId = maxId + 1;
     }
   }
 
   public getTokens(): Token[] {
-    let localStorageItem = JSON.parse(localStorage.getItem('token'));
-    return localStorageItem == null ? [] : localStorageItem.token;
+    let localStorageItem = JSON.parse(localStorage.getItem('tokens'));
+    return localStorageItem == null ? [] : localStorageItem.tokens;
     // return TOKENS;
   }
   public addToken(token: Token) {
@@ -47,6 +47,6 @@ export class TokenService {
   }
 
   private setLocalStorageTokens(tokens: Token[]) {
-    localStorage.setItem('token', JSON.stringify({tokens : tokens}));
+    localStorage.setItem('tokens', JSON.stringify({tokens : tokens}));
   }
 }

@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
    * @param router is an implementation of a router service to manage the navigation with IssueModalComponent
    * @param route holds information about the route to this instance of HomeComponent
    */
-  constructor(tokenService: TokenService,
+  constructor(public tokenService: TokenService,
               public modal: MatDialog,
               private router: Router,
               private route: ActivatedRoute) {
@@ -46,6 +46,7 @@ export class HomeComponent implements OnInit {
     // to navigate to and from “/home/issue-token” in the router
     modalRef.afterClosed().subscribe(res => {
       this.router.navigate(['../'], {relativeTo: this.route});
+      this.tokens = this.tokenService.getTokens();
     });
   };
 
