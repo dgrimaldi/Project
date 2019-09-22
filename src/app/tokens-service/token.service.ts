@@ -16,11 +16,13 @@ import {Token} from "../tokens/token";
 export class TokenService {
   private nextId: number;
   constructor() {
-    let tokensLength = this.getTokens().length;
+    let tokens = this.getTokens();
+    let tokensLength = tokens.length
     if (tokensLength == 0){
       this.nextId = 0;
     } else {
-      this.nextId = tokensLength + 1;
+      let maxId = tokens[tokensLength - 1].id;
+      this.nextId = maxId + 1;
     }
   }
 
