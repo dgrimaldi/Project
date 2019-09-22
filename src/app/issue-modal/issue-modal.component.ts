@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialogRef} from "@angular/material";
 import {FormBuilder, FormControl, FormGroup, Validator} from "@angular/forms";
+import {Token} from "../tokens/token";
 
 @Component({
   selector: 'app-issue-modal',
@@ -17,7 +18,7 @@ export class IssueModalComponent implements OnInit {
   }
 
 
-  submitForm(value: any) {
+  submitForm(value: Token) {
     this.modalRef.close();
   }
 }
