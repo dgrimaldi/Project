@@ -14,7 +14,7 @@ export class ApiService {
   }
 
   getCountries() {
-    return this.http.get<Country>(this.configUrl)
+    return this.http.get<Country[]>(this.configUrl)
       .pipe(
         retry(3),
         catchError(this.handleError)
@@ -22,8 +22,6 @@ export class ApiService {
   }
 
   getConfigResponse(): Observable<HttpResponse<Country>> {
-    console.log(this.http.get<Country>(
-      this.configUrl, { observe: 'response' }));
     return this.http.get<Country>(
       this.configUrl, { observe: 'response' });
   }

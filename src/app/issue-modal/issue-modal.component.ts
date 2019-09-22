@@ -14,8 +14,9 @@ export class IssueModalComponent implements OnInit {
   issueTokenForm: FormGroup;
   private token: Token;
   headers: string[];
-  private country: Country;
+  private countries: Country[];
   private error: any;
+  private config: Country;
 
 
   constructor(public modalRef: MatDialogRef<IssueModalComponent>,
@@ -37,7 +38,7 @@ export class IssueModalComponent implements OnInit {
   showConfig(){
     this.apiService.getCountries()
       .subscribe(
-        (data: Country) => this.country = {...data},
+        (data: Country[]) => this.countries = {...data},
         error => this.error = error
       );
   }
@@ -53,7 +54,7 @@ export class IssueModalComponent implements OnInit {
           `${key}: ${resp.headers.get(key)}`);
 
         // access the body directly, which is typed as `Country`.
-        this.country = { ... resp.body };
+        this.config = { ... resp.body };
       });
 
   }
