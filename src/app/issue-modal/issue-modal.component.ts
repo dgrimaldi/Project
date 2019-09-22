@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from "@angular/material";
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Token} from "../tokens/token";
 import {Country} from "../api-service/country";
 import {ApiService} from "../api-service/api.service";
@@ -14,10 +14,9 @@ import {TokenService} from "../tokens-service/token.service";
 export class IssueModalComponent implements OnInit {
   issueTokenForm: FormGroup;
   private token: Token;
-  headers: string[];
   private countries: Country[];
   private error: any;
-  private config: Country;
+  private isValid = true;
 
 
   constructor(public modalRef: MatDialogRef<IssueModalComponent>,
@@ -29,7 +28,7 @@ export class IssueModalComponent implements OnInit {
   ngOnInit() {
     this.showCountries();
     this.issueTokenForm = this.formBuider.group({
-      name: [null, [ Validators.required]],
+      name: [null, [Validators.required]],
       ticker: [null, [Validators.required]],
       supply: [null, [Validators.required]], //this.confirmationValidator]],
       issuer: [null, [Validators.required]],
@@ -38,7 +37,7 @@ export class IssueModalComponent implements OnInit {
     });
   }
 
-  showCountries(){
+  showCountries() {
     this.apiService.getCountries()
       .subscribe(
         countries => (this.countries = countries),
@@ -51,16 +50,21 @@ export class IssueModalComponent implements OnInit {
     for (const i in this.issueTokenForm.controls) {
       this.issueTokenForm.controls[i].markAsDirty();
       this.issueTokenForm.controls[i].updateValueAndValidity();
+      if (!this.issueTokenForm.controls[i].valid) {
+        this.isValid = false;
+      }
     }
-    this.token = new Token(
-      data.name,
-      data.ticker,
-      data.supply,
-      '',
-      data.issuerName,
-      data.Template
-    )
-    this.tokenService.addToken(this.token);
-    this.modalRef.close();
+    if (this.isValid) {
+      this.token = new Token(
+        data.name,
+        data.ticker,
+        data.supply,
+        '',
+        data.issuer,
+        data.template
+      )
+      this.tokenService.addToken(this.token);
+      this.modalRef.close();
+    }
   }
 }
