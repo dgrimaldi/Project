@@ -35,28 +35,12 @@ export class IssueModalComponent implements OnInit {
     });
   }
 
-  showConfig(){
+  showCountries(){
     this.apiService.getCountries()
       .subscribe(
         (data: Country[]) => this.countries = {...data},
         error => this.error = error
       );
-  }
-
-  showConfigResponse() {
-    this.apiService.getConfigResponse()
-    // resp is of type `HttpResponse<Country>`
-      .subscribe(resp => {
-
-        // display its headers
-        const keys = resp.headers.keys();
-        this.headers = keys.map(key =>
-          `${key}: ${resp.headers.get(key)}`);
-
-        // access the body directly, which is typed as `Country`.
-        this.config = { ... resp.body };
-      });
-
   }
 
 

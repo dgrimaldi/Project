@@ -21,11 +21,6 @@ export class ApiService {
       );
   }
 
-  getConfigResponse(): Observable<HttpResponse<Country>> {
-    return this.http.get<Country>(
-      this.configUrl, { observe: 'response' });
-  }
-
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
