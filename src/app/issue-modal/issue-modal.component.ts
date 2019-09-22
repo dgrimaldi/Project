@@ -16,7 +16,7 @@ export class IssueModalComponent implements OnInit {
   private token: Token;
   private countries: Country[];
   private error: any;
-  private isValid = true;
+  private isValid: boolean;
   private months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Set', 'Oct', 'Nov', 'Dec'];
 
 
@@ -48,6 +48,7 @@ export class IssueModalComponent implements OnInit {
 
 
   submitForm(data) {
+    this.isValid = true;
     for (const i in this.issueTokenForm.controls) {
       this.issueTokenForm.controls[i].markAsDirty();
       this.issueTokenForm.controls[i].updateValueAndValidity();
@@ -58,8 +59,12 @@ export class IssueModalComponent implements OnInit {
     var dateOBJ = new Date();
     if (this.isValid) {
       for (const i in this.months) {
-        if (dateOBJ.getUTCMonth() == i) {
-          var month = this.months[i];
+        try {
+          if (dateOBJ.getUTCMonth() == i) {
+            var month = this.months[i];
+          }
+        }catch (e) {
+
         }
       }
       this.token = new Token(
