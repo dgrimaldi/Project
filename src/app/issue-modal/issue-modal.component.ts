@@ -58,8 +58,7 @@ export class IssueModalComponent implements OnInit {
     var dateOBJ = new Date();
     if (this.isValid) {
       for (const i in this.months) {
-        console.log(dateOBJ.getMonth());
-        if (dateOBJ.getMonth() == i) {
+        if (dateOBJ.getUTCMonth() == i) {
           var month = this.months[i];
         }
       }
@@ -67,7 +66,7 @@ export class IssueModalComponent implements OnInit {
         data.name,
         data.ticker,
         data.supply,
-        dateOBJ.getDay() + ' ' + month + ' ' + dateOBJ.getUTCFullYear(),
+        dateOBJ.getUTCDate() + ' ' + month + ' ' + dateOBJ.getUTCFullYear(),
         data.issuer,
         data.template
       )
