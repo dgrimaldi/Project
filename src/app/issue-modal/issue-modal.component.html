@@ -1,39 +1,63 @@
 <h1 mat-dialog-title>Issue Token</h1>
-<div mat-dialog-content>
-  <form nz-form [formGroup]="issueTokenForm" (ngSubmit)="submitForm(issueTokenForm.value)">
+<div mat-dialog-content style="margin: 0 2% 0 2%;;">
+
+  <form nz-form [formGroup]="issueTokenForm" (ngSubmit)="submitForm()">
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="Name">Name</nz-form-label>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">Name</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid">
-        <input nz-input formControlName="name" id="name">
+        <input type="text" nz-input formControlName="name" id="name" required>
       </nz-form-control>
     </nz-form-item>
+
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="Ticker">Ticker</nz-form-label>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="ticker">Ticker</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid">
-        <input nz-input formControlName="ticker" id="ticker">
+        <input type="text" nz-input formControlName="ticker" id="ticker" required>
       </nz-form-control>
     </nz-form-item>
+
+
     <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="Supply">Supply</nz-form-label>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="supply">Supply</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid">
-        <input nz-input formControlName="supply" id="totalSupply">
+        <input type="text" nz-input formControlName="supply" id="totalSupply" required>
       </nz-form-control>
     </nz-form-item>
+
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="issuer">Issuer</nz-form-label>
       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid">
-        <input nz-input formControlName="issuer" id="issuerName">
+        <input type="text" nz-input formControlName="issuer" id="issuerName" required>
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item>
-      <nz-cascader [nzOptions]="['ERC20']" [(ngModel)]="value">
 
-      </nz-cascader>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="template">Template</nz-form-label>
+      <nz-form-label [nzSm]="14" [nzXs]="24">
+        <nz-select formControlName="template">
+          <nz-option nzLabel="ERC20" nzValue="ERC20"></nz-option>
+        </nz-select>
+      </nz-form-label>
     </nz-form-item>
-    <nz-form-item nz-row>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="country">Country</nz-form-label>
+      <nz-form-label [nzSm]="14" [nzXs]="24">
+        <nz-select formControlName="country">
+          <nz-option nzLabel="IT" nzValue="IT"></nz-option>
+        </nz-select>
+      </nz-form-label>
+    </nz-form-item>
+
+    <nz-form-item nz-row class="register-area">
       <nz-form-control [nzSpan]="14" [nzOffset]="6">
-        <button nz-button nzType="primary" type="submit">add</button>
+        <button nz-button nzType="primary">Register</button>
       </nz-form-control>
     </nz-form-item>
+
   </form>
+  <p>
+    Form Status: {{ issueTokenForm.status }}
+  </p>
+
 </div>

@@ -5,11 +5,17 @@ import {IssueModalComponent} from "./issue-modal/issue-modal.component";
 
 // Redirect to HomeComponent if the URL contain ''
 const routes: Routes = [
-  {path: 'token-list', component: HomeComponent,
-  children: [{
-    path: 'issue-token',
-    component: IssueModalComponent
-  }]},
+  {
+    path: 'token-list', component: HomeComponent,
+
+    //Declaration of the dummy component and
+    // configure the Router Module to load it
+    // on ‘dialog’ navigation
+    children: [{
+      path: 'issue-token',
+      component: IssueModalComponent
+    }]
+  },
 
   // pathMatch: 'full' result in a route hit when
   // the remaining, unmatched segments of the URL match

@@ -7,6 +7,17 @@
   overflow:hidden;
 }
 
+.my-menu{
+  background-color: #333553;
+  border-right: #333553;
+  height:100%;
+  color: white;
+}
+
+.my-text{
+  color: white;
+}
+
 /*:host {
   display: flex;
   text-rendering: optimizeLegibility;
