@@ -1,18 +1,24 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {TokenService} from "../tokens-service/token.service";
 import {Token} from "../tokens/token";
 import {MatDialog} from "@angular/material";
 import {IssueModalComponent} from "../issue-modal/issue-modal.component";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Subject} from "rxjs";
+import {debounceTime} from "rxjs/operators";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   // Array of tokens
   tokens: Token[];
+  private searchToken: Subject<string> = new Subject();
+
+  @Input() readonly placeholder: string = '';
+  @Output() setValue: EventEmitter<string> = new EventEmitter();
 
   /**
    *
@@ -26,6 +32,7 @@ export class HomeComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute) {
     this.tokens = tokenService.getTokens();
+    this.setSearchTooken();
   }
 
   ngOnInit() {
@@ -52,5 +59,21 @@ export class HomeComponent implements OnInit {
 
   removeToken(number: number) {
     this.tokenService.removeToken(number);
+  }
+
+  private setSearchTooken() {
+    this.searchToken.pipe(
+      debounceTime(500)
+    ).subscribe((searchValue: string) => {
+      this.setValue.emit(searchValue);
+    });
+  }
+
+  public updateSearchToken(searchTextValue: string) {
+    this.searchToken.next(searchTextValue);
+  }
+
+  ngOnDestroy() {
+    this.searchToken.unsubscribe();
   }
 }
