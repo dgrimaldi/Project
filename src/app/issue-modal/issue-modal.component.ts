@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialogRef} from "@angular/material";
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {Token} from "../tokens/token";
-import {Country} from "../api-service/Country";
+import {Country} from "../api-service/country";
 import {ApiService} from "../api-service/api.service";
 
 @Component({
@@ -38,7 +38,7 @@ export class IssueModalComponent implements OnInit {
   showCountries(){
     this.apiService.getCountries()
       .subscribe(
-        (data: Country[]) => this.countries = {...data},
+        countries => (this.countries = countries),
         error => this.error = error
       );
   }

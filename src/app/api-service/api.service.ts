@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
-import {Country} from "./Country";
+import {Country} from "./country";
 import {catchError, retry} from "rxjs/operators";
 import {Observable, throwError} from "rxjs/index";
 
@@ -8,13 +8,13 @@ import {Observable, throwError} from "rxjs/index";
   providedIn: 'root'
 })
 export class ApiService {
-  private configUrl = 'https://restcountries.eu/rest/v2/regionalbloc/eu';
+  private countryUrl = 'https://restcountries.eu/rest/v2/regionalbloc/eu';
 
   constructor(private http: HttpClient) {
   }
 
-  getCountries() {
-    return this.http.get<Country[]>(this.configUrl)
+  getCountries(): Observable<Country[]> {
+    return this.http.get<Country[]>(this.countryUrl)
       .pipe(
         retry(3),
         catchError(this.handleError)
