@@ -31,10 +31,11 @@ export class HomeComponent implements OnInit {
               public modal: MatDialog,
               private router: Router,
               private route: ActivatedRoute) {
-    this.tokens = tokenService.getTokens();
   }
 
   ngOnInit() {
+    //
+    this.tokens = this.tokenService.getTokens();
   }
 
   /**
@@ -63,10 +64,10 @@ export class HomeComponent implements OnInit {
 
   search(){
     this.tokens = this.tokens.filter( res => {
-      if(this.searchToken != '') {
-        return res.name.toLocaleLowerCase().match(this.searchToken.toLocaleLowerCae());
-      } else
-        this.ngOnInit();
+      if(this.searchToken != "") {
+        return res.name.toLocaleLowerCase().match(this.searchToken.toLocaleLowerCase());
+      } else if (this.searchToken == "")
+        return this.tokenService.getTokens();
     })
   }
 }
