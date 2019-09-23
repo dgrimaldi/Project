@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Country} from "./country";
 import {catchError, retry} from "rxjs/operators";
 import {Observable, throwError} from "rxjs/index";
@@ -14,21 +14,23 @@ export class ApiService {
   }
 
   /**
-   *
-   * @returns {Observable<Country[]>}
+   * implemetation of HttpClient.get() to fetch information from the server
+   * @returns {Observable<Country[]>} an observable array of Country
    */
   getCountries(): Observable<Country[]> {
+    //specify that interface as the HttpClient.get() call's type parameter in the service.
     return this.http.get<Country[]>(this.countryUrl)
       .pipe(
-        retry(3),
-        catchError(this.handleError)
+        retry(3), // retry a failed request up to 3 times
+        catchError(this.handleError) // then handle the error
       );
   }
 
   /**
-   *
-   * @param {HttpErrorResponse} error
-   * @returns {Observable<never>}
+   * it inspects HttpErrorResponse and figures out what really happened
+   * then interprets and solves the error.
+   * @param {HttpErrorResponse} error the response from HttpClient.get()
+   * @returns {Observable<never>} an observable with a user-facing error message
    */
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -41,7 +43,6 @@ export class ApiService {
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
     }
-    // return an observable with a user-facing error message
     return throwError(
       'Something bad happened; please try again later.');
     };
