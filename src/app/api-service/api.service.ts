@@ -13,6 +13,10 @@ export class ApiService {
   constructor(private http: HttpClient) {
   }
 
+  /**
+   *
+   * @returns {Observable<Country[]>}
+   */
   getCountries(): Observable<Country[]> {
     return this.http.get<Country[]>(this.countryUrl)
       .pipe(
@@ -21,6 +25,11 @@ export class ApiService {
       );
   }
 
+  /**
+   *
+   * @param {HttpErrorResponse} error
+   * @returns {Observable<never>}
+   */
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

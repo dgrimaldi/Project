@@ -4,7 +4,6 @@
  * service that can be injected
  */
 import {Inject, Injectable} from '@angular/core';
-import {TOKENS} from "../tokens/mock-tokens";
 import {Token} from "../tokens/token";
 
 
@@ -17,10 +16,12 @@ export class TokenService {
   private nextId: number;
 
   /**
-   *
-   *
+   *  Check if the storage is available and then
+   *  fetch tokens from local storage. If the tokens
+   *  array is empty set the id to 0, while if the
+   *  array has a element set the key id to the next
+   *  number
    */
-
   constructor() {
     if (this.storageAvailable('localStorage')) {
       let tokens = this.getTokens();
@@ -34,11 +35,13 @@ export class TokenService {
   }
 
   /**
-   * getItem method is to fetch the key of the token from the local storage
+   * getItem method is to fetch tokens from the local storage if the
+   * storage is available
    * @returns {Token[]} return an array of tokens from Local web storage
    * otherwise an empty array
    */
   public getTokens(): Token[] {
+
     // The JSON.parse() method parses a JSON string,constructing
     // the JavaScript value or object described by the string.
     if (this.storageAvailable('localStorage')) {
@@ -49,7 +52,6 @@ export class TokenService {
 
 
   /**
-
    * push token in tokens array and then call setLocalStorageTokens
    * So, update the id to the next number
    * @param {Token} token that want to store in Local web storage
@@ -86,7 +88,12 @@ export class TokenService {
 
   }
 
-
+  /**
+   *
+   * @param type is the type of storage
+   * @returns {any} true if the storage is avaible
+   *                false otherwise
+   */
   public storageAvailable(type) {
     var storage;
     try {
