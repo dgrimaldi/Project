@@ -14,10 +14,11 @@ import {Subject} from "rxjs";
 export class HomeComponent implements OnInit {
   // Array of tokens
   tokens: Token[];
-  private searchToken: Subject<string> = new Subject();
+  searchToken: any;
+  // private searchToken: Subject<string> = new Subject();
 
-  @Input() readonly placeholder: string = '';
-  @Output() setValue: EventEmitter<string> = new EventEmitter();
+  // @Input() readonly placeholder: string = '';
+  // @Output() setValue: EventEmitter<string> = new EventEmitter();
 
   /**
    *
@@ -57,7 +58,15 @@ export class HomeComponent implements OnInit {
 
   removeToken(number: number) {
     this.tokenService.removeToken(number);
-this.tokens = this.tokenService.getTokens();
+    this.tokens = this.tokenService.getTokens();
+  }
 
+  search(){
+    this.tokens = this.tokens.filter( res => {
+      if(this.searchToken != '') {
+        return res.name.toLocaleLowerCase().match(this.searchToken.toLocaleLowerCae());
+      } else
+        this.ngOnInit();
+    })
   }
 }
