@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from "@angular/material";
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Token} from "../tokens/token";
 import {Country} from "../api-service/country";
 import {ApiService} from "../api-service/api.service";
@@ -38,6 +38,9 @@ export class IssueModalComponent implements OnInit {
     });
   }
 
+  /**
+   *
+   */
   showCountries() {
     this.apiService.getCountries()
       .subscribe(
@@ -46,7 +49,10 @@ export class IssueModalComponent implements OnInit {
       );
   }
 
-
+  /**
+   *
+   * @param data
+   */
   submitForm(data) {
     this.isValid = true;
     for (const i in this.issueTokenForm.controls) {

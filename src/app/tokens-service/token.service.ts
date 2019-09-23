@@ -16,40 +16,50 @@ import {Token} from "../tokens/token";
 export class TokenService {
   private nextId: number;
 
+  /**
+   *
+   *
+   */
+
   constructor() {
     let tokens = this.getTokens();
-    let tokensLength = tokens.length
-    if (tokensLength == 0){
+    if (tokens.length == 0){
       this.nextId = 0;
     } else {
-      let maxId = tokens[tokensLength -1].id;
+      let maxId = tokens[tokens.length -1].id;
       this.nextId = maxId + 1;
     }
   }
 
   /**
-   * getItem to fetch the key of the token
+   * getItem method is to fetch the key of the token from the local storage
    * @returns {Token[]} return an array of tokens from Local web storage
    * otherwise an empty array
    */
   public getTokens(): Token[] {
     let localStorageItem = JSON.parse(localStorage.getItem('tokens'));
     return localStorageItem == null ? [] : localStorageItem.tokens;
-    // return TOKENS;
   }
+
+  /**
+   * push token in tokens array and then call setLocalStorageTokens
+   * So, update the id to the next number
+   * @param {Token} token that want to store in Local web storage
+   */
   public addToken(token: Token) {
     token.id = this.nextId;
     let tokens = this.getTokens();
     tokens.push(token);
 
-    // save the todos to local storage
+    // save the tokens to local storage
     this.setLocalStorageTokens(tokens);
     this.nextId++;
-    // TOKENS.push(token);
   }
 
   /**
-   *
+   * The filter() method creates a new array with all elements that pass the test
+   * implemented by the provided function.
+   * filter() method implements callback function once for each element in an array
    * @param {number} id the key of the token which must delete
    */
   public removeToken(id: number){
