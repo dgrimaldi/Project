@@ -14,7 +14,7 @@ import {Subject} from "rxjs";
 export class HomeComponent implements OnInit {
   // Array of tokens
   tokens: Token[];
-  searchToken: any;
+  searchToken: string;
   // private searchToken: Subject<string> = new Subject();
 
   // @Input() readonly placeholder: string = '';
@@ -62,12 +62,11 @@ export class HomeComponent implements OnInit {
     this.tokens = this.tokenService.getTokens();
   }
 
-  search(){
-    this.tokens = this.tokens.filter( res => {
-      if(this.searchToken != "") {
-        return res.name.toLocaleLowerCase().match(this.searchToken.toLocaleLowerCase());
-      } else if (this.searchToken == "")
-        return this.tokenService.getTokens();
-    })
+  search(query: string) {
+    if (query != '') {
+      this.tokens = this.tokens.filter(token => token.name.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) !== -1);
+    } else if (query == '') {
+      this.tokens = this.tokenService.getTokens();
+    }
   }
 }

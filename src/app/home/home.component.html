@@ -15,7 +15,7 @@
         <nz-input-group [nzPrefix]="prefixIconSearch">
           <input type="text" nz-input placeholder="Contract name or address or ticker"
                  [(ngModel)]="searchToken"
-                 (input)="search()">
+                 (input)="search(searchToken)">
         </nz-input-group>
         <ng-template #prefixIconSearch>
           <i nz-icon nzType="search"></i>
