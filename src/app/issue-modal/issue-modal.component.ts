@@ -47,11 +47,12 @@ export class IssueModalComponent implements OnInit {
    * The callback in the updated component method receives a typed data object,
    * which is easier and safer to consume
    */
+
   showCountries() {
     this.apiService.getCountries()
       .subscribe(
         // clone the data object, using its known Config shape
-        (data: Country[]) => (this.countries = {...data}),
+        countries => this.countries = countries,
         //HttpClient return object when there is an error object instead of successful response.
         error => this.error = error
       );
