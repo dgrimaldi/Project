@@ -19,7 +19,13 @@ export class IssueModalComponent implements OnInit {
   private isValid: boolean;
   private months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Set', 'Oct', 'Nov', 'Dec'];
 
-
+  /**
+   *
+   * @param {MatDialogRef<IssueModalComponent>} modalRef Reference to a dialog opened via the MatDialog service.
+   * @param {FormBuilder} formBuider
+   * @param {ApiService} apiService Reference to  via ApiService
+   * @param {TokenService} tokenService
+   */
   constructor(public modalRef: MatDialogRef<IssueModalComponent>,
               private formBuider: FormBuilder,
               private apiService: ApiService,

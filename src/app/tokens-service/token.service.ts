@@ -22,12 +22,14 @@ export class TokenService {
    */
 
   constructor() {
-    let tokens = this.getTokens();
-    if (tokens.length == 0){
-      this.nextId = 0;
-    } else {
-      let maxId = tokens[tokens.length -1].id;
-      this.nextId = maxId + 1;
+    if (this.storageAvailable('localStorage')) {
+      let tokens = this.getTokens();
+      if (tokens.length == 0) {
+        this.nextId = 0;
+      } else {
+        let maxId = tokens[tokens.length - 1].id;
+        this.nextId = maxId + 1;
+      }
     }
   }
 
@@ -37,11 +39,17 @@ export class TokenService {
    * otherwise an empty array
    */
   public getTokens(): Token[] {
-    let localStorageItem = JSON.parse(localStorage.getItem('tokens'));
-    return localStorageItem == null ? [] : localStorageItem.tokens;
+    // The JSON.parse() method parses a JSON string,constructing
+    // the JavaScript value or object described by the string.
+    if (this.storageAvailable('localStorage')) {
+      let localStorageItem = JSON.parse(localStorage.getItem('tokens'));
+      return localStorageItem == null ? [] : localStorageItem.tokens;
+    }
   }
 
+
   /**
+
    * push token in tokens array and then call setLocalStorageTokens
    * So, update the id to the next number
    * @param {Token} token that want to store in Local web storage
@@ -62,8 +70,8 @@ export class TokenService {
    * filter() method implements callback function once for each element in an array
    * @param {number} id the key of the token which must delete
    */
-  public removeToken(id: number){
-    let tokens = this.getTokens().filter((token)=> token.id != id);
+  public removeToken(id: number) {
+    let tokens = this.getTokens().filter((token) => token.id != id);
     this.setLocalStorageTokens(tokens);
   }
 
@@ -72,6 +80,35 @@ export class TokenService {
    * @param {Token[]} tokens
    */
   private setLocalStorageTokens(tokens: Token[]) {
-    localStorage.setItem('tokens', JSON.stringify({tokens : tokens}));
+    if (this.storageAvailable('localStorage')) {
+      localStorage.setItem('tokens', JSON.stringify({tokens: tokens}));
+    }
+
+  }
+
+
+  public storageAvailable(type) {
+    var storage;
+    try {
+      storage = window[type];
+      var x = '__storage_test__';
+      storage.setItem(x, x);
+      storage.removeItem(x);
+      return true;
+    }
+    catch (e) {
+      return e instanceof DOMException && (
+          // everything except Firefox
+        e.code === 22 ||
+        // Firefox
+        e.code === 1014 ||
+        // test name field too, because code might not be present
+        // everything except Firefox
+        e.name === 'QuotaExceededError' ||
+        // Firefox
+        e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+        // acknowledge QuotaExceededError only if there's something already stored
+        (storage && storage.length !== 0);
+    }
   }
 }

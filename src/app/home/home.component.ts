@@ -4,7 +4,6 @@ import {Token} from "../tokens/token";
 import {MatDialog} from "@angular/material";
 import {IssueModalComponent} from "../issue-modal/issue-modal.component";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-home',
@@ -15,10 +14,6 @@ export class HomeComponent implements OnInit {
   // Array of tokens
   tokens: Token[];
   searchToken: string;
-  // private searchToken: Subject<string> = new Subject();
-
-  // @Input() readonly placeholder: string = '';
-  // @Output() setValue: EventEmitter<string> = new EventEmitter();
 
   /**
    *
@@ -34,34 +29,45 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    //
     this.tokens = this.tokenService.getTokens();
   }
 
   /**
    *  A dialog is opened by calling the open method with a component to be loaded and an optional
    *  config object. The open method will return an instance of MatDialogRef
+   *  If the local storage is not accessible an alert is displayed
    */
   openModal(): void {
-    const modalRef = this.modal.open(IssueModalComponent, {
-      width: '600px'
-    });
+    if(this.tokenService.storageAvailable('localStorage')) {
+      const modalRef = this.modal.open(IssueModalComponent, {
+        width: '600px'
+      });
 
-    // MatDialogRef provides a handle on the opened dialog.
-    // It can be used to close the dialog and to receive notification
-    // when the dialog has been closed. In this case is used
-    // to navigate to and from “/home/issue-token” in the router
-    modalRef.afterClosed().subscribe(res => {
-      this.router.navigate(['../'], {relativeTo: this.route});
-      this.tokens = this.tokenService.getTokens();
-    });
+      // MatDialogRef provides a handle on the opened dialog.
+      // It can be used to close the dialog and to receive notification
+      // when the dialog has been closed. In this case is used
+      // to navigate to and from “/home/issue-token” in the router
+      modalRef.afterClosed().subscribe(res => {
+        this.router.navigate(['../'], {relativeTo: this.route});
+        this.tokens = this.tokenService.getTokens();
+      });
+    } else
+      alert("Local storage not avaible");
   };
 
+  /**
+   *
+   * @param {number} number
+   */
   removeToken(number: number) {
     this.tokenService.removeToken(number);
     this.tokens = this.tokenService.getTokens();
   }
 
+  /**
+   *
+   * @param {string} query
+   */
   search(query: string) {
     if (query != '') {
       this.tokens = this.tokens.filter(token => token.name.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) !== -1);
