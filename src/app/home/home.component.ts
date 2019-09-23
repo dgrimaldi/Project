@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
    *  If the local storage is not accessible an alert is displayed
    */
   openModal(): void {
-    if(this.thereIsStorage) {
+    if (this.thereIsStorage) {
       const modalRef = this.modal.open(IssueModalComponent, {
         width: '600px'
       });
@@ -54,11 +54,11 @@ export class HomeComponent implements OnInit {
         this.tokens = this.tokenService.getTokens();
       });
     } else
-      alert("Local storage not avaible");
+      alert("Local storage not available");
   };
 
   /**
-   *call method removeToken in TokenService and
+   * call method removeToken in TokenService and
    * then update the tokens array for update the view
    * @param {number} key is the identifier in the storage
    */
@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit {
    * @param {string} query
    */
   search(query: string) {
-    if (query != '') {
+    if (query != '' && query.length >= 3) {
       this.tokens = this.tokens.filter(token => token.name.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) !== -1);
     } else if (query == '') {
       this.tokens = this.tokenService.getTokens();
