@@ -16,14 +16,13 @@ export class TokenService {
   private nextId: number;
 
   /**
-   *  Check if the storage is available and then
-   *  fetch tokens from local storage. If the tokens
+   *  it fetches tokens from local storage. If the tokens
    *  array is empty set the id to 0, while if the
    *  array has a element set the key id to the next
    *  number
    */
   constructor() {
-    if (this.storageAvailable('localStorage')) {
+    if (this.storageAvailable('localStorage')) { //check if storage is available
       let tokens = this.getTokens();
       if (tokens.length == 0) {
         this.nextId = 0;
@@ -44,7 +43,7 @@ export class TokenService {
 
     // The JSON.parse() method parses a JSON string,constructing
     // the JavaScript value or object described by the string.
-    if (this.storageAvailable('localStorage')) {
+    if (this.storageAvailable('localStorage')) { //check if storage is available
       let localStorageItem = JSON.parse(localStorage.getItem('tokens'));
       return localStorageItem == null ? [] : localStorageItem.tokens;
     }
@@ -52,7 +51,7 @@ export class TokenService {
 
 
   /**
-   * push token in tokens array and then call setLocalStorageTokens
+   * it pushes token in tokens array and then call setLocalStorageTokens
    * So, update the id to the next number
    * @param {Token} token that want to store in Local web storage
    */
@@ -78,21 +77,23 @@ export class TokenService {
   }
 
   /**
-   * setItem to fe
-   * @param {Token[]} tokens
+   * setLocalStorageTokens requires a array of tokens and then pass, with
+   * setItem method, to the localStorage with 'tokens' key and the array
+   * as a value, the method will add that key to the storage,
+   * or update that key's value if it already exists.
+   * @param {Token[]} tokens array of tokens
    */
   private setLocalStorageTokens(tokens: Token[]) {
-    if (this.storageAvailable('localStorage')) {
+    if (this.storageAvailable('localStorage')) { //check if storage is available
       localStorage.setItem('tokens', JSON.stringify({tokens: tokens}));
     }
 
   }
 
   /**
-   *
-   * @param type is the type of storage
-   * @returns {any} true if the storage is available
-   *                false otherwise
+   * Here is a function that detects whether localStorage is both supported and available
+   * @param type is a property on the window object named localStorage.
+   * @returns {any} true if the storage is available, false otherwise
    */
   public storageAvailable(type) {
     var storage;
