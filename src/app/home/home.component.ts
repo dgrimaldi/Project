@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   // Array of tokens
   tokens: Token[];
   searchToken: string;
+  thereIsStorage: boolean;
 
   /**
    *
@@ -30,6 +31,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.tokens = this.tokenService.getTokens();
+    this.thereIsStorage = this.tokenService.storageAvailable('localStorage');
   }
 
   /**
@@ -38,7 +40,7 @@ export class HomeComponent implements OnInit {
    *  If the local storage is not accessible an alert is displayed
    */
   openModal(): void {
-    if(this.tokenService.storageAvailable('localStorage')) {
+    if(this.thereIsStorage) {
       const modalRef = this.modal.open(IssueModalComponent, {
         width: '600px'
       });

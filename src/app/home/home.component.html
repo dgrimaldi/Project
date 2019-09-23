@@ -38,7 +38,7 @@
         <th nzWidth="8%" class="my-color" [nzAlign]="">Actions</th>
       </tr>
       </thead>
-      <tbody class="my-color">
+      <tbody class="my-color" *ngIf="thereIsStorage; else error">
       <tr *ngFor="let token of tokens" >
         <td>{{token.name}}</td>
         <td>{{token.ticker}}</td>
@@ -57,3 +57,6 @@
     </nz-table>
   </nz-layout>
 </nz-layout>
+
+<nz-result #error nzStatus="warning" nzTitle="There are some problem with Local Storage">
+</nz-result>
