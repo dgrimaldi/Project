@@ -39,7 +39,7 @@
       </tr>
       </thead>
       <tbody class="my-color" *ngIf="thereIsStorage; else error">
-      <tr *ngFor="let token of tokens" >
+      <tr *ngFor="let token of tokens">
         <td>{{token.name}}</td>
         <td>{{token.ticker}}</td>
         <td>{{token.totalSupply}}</td>
@@ -57,6 +57,7 @@
     </nz-table>
   </nz-layout>
 </nz-layout>
-
-<nz-result #error nzStatus="warning" nzTitle="There are some problem with Local Storage">
-</nz-result>
+<ng-template>
+  <nz-result #error nzStatus="warning" nzTitle="There are some problem with Local Storage">
+  </nz-result>
+</ng-template>
