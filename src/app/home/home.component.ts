@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TokenService} from "../tokens-service/token.service";
 import {Token} from "../tokens/token";
 import {MatDialog} from "@angular/material";
@@ -58,11 +58,12 @@ export class HomeComponent implements OnInit {
   };
 
   /**
-   *
-   * @param {number} number
+   *call method removeToken in TokenService and
+   * then update the tokens array for update the view
+   * @param {number} key is the identifier in the storage
    */
-  removeToken(number: number) {
-    this.tokenService.removeToken(number);
+  removeToken(key: number) {
+    this.tokenService.removeToken(key);
     this.tokens = this.tokenService.getTokens();
   }
 

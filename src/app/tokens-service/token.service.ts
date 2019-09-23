@@ -91,7 +91,7 @@ export class TokenService {
   /**
    *
    * @param type is the type of storage
-   * @returns {any} true if the storage is avaible
+   * @returns {any} true if the storage is available
    *                false otherwise
    */
   public storageAvailable(type) {
