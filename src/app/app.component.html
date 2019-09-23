@@ -5,16 +5,14 @@
   <div nz-col [nzSpan]="18" [nzPush]="6">
     <router-outlet></router-outlet>
   </div>
-    <div class="menu-div" nz-col [nzSpan]="6" [nzPull]="18">
-      <!-- Insert logo taurus -->
-      <br/>
-      <br/>
+    <div class="menu-div my-menu" nz-col [nzSpan]="6" [nzPull]="18">
+      <img src="../assets/logo.png" style="max-width: 250px; padding: 10% 0 10% 30%">
       <ul class="my-menu" nz-menu nzMode="inline" [nzTheme]="">
         <li  nz-menu-item nz-tooltip nzPlacement="right" nzTitle="Issue Token" routerLink="/">
           <i nz-icon nzType="plus"></i>
           <span>Issue Token</span>
         </li>
-        <li nz-submenu nzTitle="Token List" nzIcon="unordered-list" routerLink="/token-list" routerLinkActive="active">
+        <li nz-submenu nzTitle="Token List" nzIcon="unordered-list" routerLink="/token-list/issue-token" routerLinkActive="active">
           <ul>
             <li nz-menu-item>Option 5</li>
             <li nz-menu-item>Option 6</li>

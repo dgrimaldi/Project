@@ -2,7 +2,7 @@
   <nz-header class="my-header">
     <h1 class="my-color">Token List</h1>
   </nz-header>
-  <nz-header class="my-header">
+  <nz-header class="my-search">
     <div nz-row>
       <div nz-col [nzSpan]="7" [nzPush]="17">
         <button class="my-button" nz-button nzType="primary" (click)="openModal()" routerLink="issue-token">Isuee
@@ -39,7 +39,7 @@
       </tr>
       </thead>
       <tbody class="my-color">
-      <tr *ngFor="let token of tokens">
+      <tr *ngFor="let token of tokens" >
         <td>{{token.name}}</td>
         <td>{{token.ticker}}</td>
         <td>{{token.totalSupply}}</td>
