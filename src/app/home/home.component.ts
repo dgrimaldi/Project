@@ -5,14 +5,13 @@ import {MatDialog} from "@angular/material";
 import {IssueModalComponent} from "../issue-modal/issue-modal.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subject} from "rxjs";
-import {debounceTime} from "rxjs/operators";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
   // Array of tokens
   tokens: Token[];
   private searchToken: Subject<string> = new Subject();
@@ -32,7 +31,6 @@ export class HomeComponent implements OnInit, OnDestroy {
               private router: Router,
               private route: ActivatedRoute) {
     this.tokens = tokenService.getTokens();
-    this.setSearchTooken();
   }
 
   ngOnInit() {
@@ -61,21 +59,5 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.tokenService.removeToken(number);
 this.tokens = this.tokenService.getTokens();
 
-  }
-
-  private setSearchTooken() {
-    this.searchToken.pipe(
-      debounceTime(500)
-    ).subscribe((searchValue: string) => {
-      this.setValue.emit(searchValue);
-    });
-  }
-
-  public updateSearchToken(searchTextValue: string) {
-    this.searchToken.next(searchTextValue);
-  }
-
-  ngOnDestroy() {
-    this.searchToken.unsubscribe();
   }
 }

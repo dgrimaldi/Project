@@ -13,8 +13,7 @@
       </div>
       <div nz-col [nzSpan]="17" [nzPull]="7">
         <nz-input-group [nzPrefix]="prefixIconSearch">
-          <input type="text" nz-input placeholder="Contract name or address or ticker"
-          (keyup)="updateSearchToken($event.target.value)">
+          <input type="text" nz-input placeholder="Contract name or address or ticker">
         </nz-input-group>
         <ng-template #prefixIconSearch>
           <i nz-icon nzType="search"></i>
