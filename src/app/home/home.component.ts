@@ -59,6 +59,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   removeToken(number: number) {
     this.tokenService.removeToken(number);
+this.tokens = this.tokenService.getTokens();
+
   }
 
   private setSearchTooken() {

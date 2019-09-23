@@ -38,7 +38,7 @@
       </tr>
       </thead>
       <tbody class="my-color">
-      <tr *ngFor="let token of tokens; let i  = index">
+      <tr *ngFor="let token of tokens">
         <td>{{token.name}}</td>
         <td>{{token.ticker}}</td>
         <td>{{token.totalSupply}}</td>
@@ -47,7 +47,7 @@
         <td>{{token.template}}</td>
         <td></td>
         <td align="center">
-          <a (click)="removeToken(i+1)">
+          <a (click)="removeToken(token.id)">
             <i nz-icon nzType="delete" nzTheme="outline"></i>
           </a>
         </td>

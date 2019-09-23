@@ -56,28 +56,21 @@ export class IssueModalComponent implements OnInit {
         this.isValid = false;
       }
     }
-    var dateOBJ = new Date();
-    if (this.isValid) {
-      for (const i in this.months) {
-        try {
-          if (dateOBJ.getUTCMonth() == i) {
-            var month = this.months[i];
-          }
-        }catch (e) {
 
-        }
-      }
+    if (this.isValid) {
+      const dateOBJ = new Date();
       this.token = new Token(
         data.name,
         data.ticker,
         data.supply,
-        dateOBJ.getUTCDate() + ' ' + month + ' ' + dateOBJ.getUTCFullYear(),
+        dateOBJ.getUTCDate() + ' ' + this.months[dateOBJ.getUTCMonth()] + ' ' + dateOBJ.getUTCFullYear(),
         data.issuer,
         data.template
       )
       this.tokenService.addToken(this.token);
       this.modalRef.close();
     }
-
   }
+
 }
+
