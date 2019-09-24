@@ -82,7 +82,7 @@ describe('ApiServiceTest', () => {
       const req = httpTestingController.expectOne(apiService.countryUrl);
 
       //respond with 404 and the error message in the body
-      const msg = 'delibarate 404 error';
+      const msg = 'deliberate 404 error';
       req.flush(msg, {status: 404, statusText: 'Not Found'});
     })
 
