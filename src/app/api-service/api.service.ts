@@ -73,7 +73,7 @@ export class ApiService {
         `server returned code ${error.status} with body "${error.error}"`;
 
       // TODO: better job of transforming error for user consumption
-      this.add(`${this}: ${operation} failed: ${message}`);
+      this.add('${operation} failed: ${message}');
 
       // Let the app keep running by returning a safe result.
       return of(result);
@@ -87,5 +87,8 @@ export class ApiService {
 
   private clear() {
     this.messages = [];
+  }
+  public getMessages() {
+    return this.messages;
   }
 }
