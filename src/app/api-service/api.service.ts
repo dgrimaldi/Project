@@ -30,8 +30,8 @@ export class ApiService {
     return this.http.get<Country[]>(this.countryUrl)
       .pipe(
         // retry(3), retry a failed request up to 3 times
-        catchError(this.handleErrorTest('getCountries', [])) // then handle the error
-
+        //catchError(this.handleErrorTest('getCountries', [])) // then handle the error
+        catchError(this.handleError)
       );
   }
 
