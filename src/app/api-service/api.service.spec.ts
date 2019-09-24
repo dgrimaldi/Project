@@ -36,6 +36,7 @@ describe('ApiServiceTest', () => {
   })
 
   /// ApiService method tests begin ///
+  //
   describe('#getCountries', () => {
     let exceptedCountries: Country[];
     beforeEach(() => {
@@ -77,14 +78,15 @@ describe('ApiServiceTest', () => {
     it('should turn 404 into an empty countries result', () => {
       // Make an HTTP GET request through getCountries() of ApiService
       apiService.getCountries().subscribe(
-        countries => expect(countries).toEqual(exceptedCountries, 'should have an empty countries array'),
+        countries => expect(countries.length).toEqual(0, 'should return empty countries array'),
         fail
       );
       const req = httpTestingController.expectOne(apiService.countryUrl);
+
       //respond with 404 and the error message in the body
       const msg = 'deliberate 404 error';
       req.flush(msg, {status: 404, statusText: 'Not Found'});
-    })
+    });
 
     it('should return excepted countries (called multiple times)', () => {
       // Make an HTTP GET request through getCountries() of ApiService for three times
@@ -98,7 +100,7 @@ describe('ApiServiceTest', () => {
       const req = httpTestingController.match(apiService.countryUrl);
       expect(req.length).toEqual(3, 'calls to getCountries()');
 
-      //respond with 404 and the error message in the body
+
       req[0].flush([]);
       req[1].flush([{name:'Italy', alpha2Code: 'IT'}]);
       req[2].flush(exceptedCountries);

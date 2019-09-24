@@ -49,7 +49,7 @@ export class IssueModalComponent implements OnInit {
    * which is easier and safer to consume
    */
 
-   showCountries() {
+  showCountries() {
     this.apiService.getCountries()
       .subscribe(
         // clone the data object, using its known Config shape
@@ -91,8 +91,5 @@ export class IssueModalComponent implements OnInit {
       this.modalRef.close(); // close the modal
     }
   }
-
-  // First, initialize the Angular testing environment.
-
 }
 
