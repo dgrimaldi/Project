@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {Country} from "./country";
 import {catchError, retry} from "rxjs/operators";
 import {Observable, of, throwError} from "rxjs/index";
@@ -21,6 +21,10 @@ export class ApiService {
   constructor(private http: HttpClient) {
   }
 
+
+
+
+
   /**
    * implemetation of HttpClient.get() to fetch information from the server
    * @returns {Observable<Country[]>} an observable array of Country
@@ -30,8 +34,8 @@ export class ApiService {
     return this.http.get<Country[]>(this.countryUrl)
       .pipe(
         // retry(3), retry a failed request up to 3 times
-        //catchError(this.handleErrorTest('getCountries', [])) // then handle the error
-        catchError(this.handleError)
+        catchError(this.handleErrorTest('getCountries', [])) // then handle the error
+        // catchError(this.handleError)
       );
   }
 
@@ -66,14 +70,15 @@ export class ApiService {
 
     return (error: HttpErrorResponse): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+      // console.error(error); // log to console instead
 
       const message = (error.error instanceof ErrorEvent) ?
         error.error.message :
-        `server returned code ${error.status} with body "${error.error}"`;
+        'server returned code '+error.status+' with body '+error.error;
 
       // TODO: better job of transforming error for user consumption
-      this.add('${operation} failed: ${message}');
+      this.add(operation +' failed: ' + message);
+      console.error(error.error)
 
       // Let the app keep running by returning a safe result.
       return of(result);

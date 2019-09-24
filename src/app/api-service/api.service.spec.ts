@@ -40,6 +40,7 @@ describe('ApiServiceTest', () => {
     let exceptedCountries: Country[];
     beforeEach(() => {
       apiService = TestBed.get(ApiService);
+      console.log('i am here 1');
       exceptedCountries = [
         {name: '', alpha2Code: ''}
       ] as Country[];
@@ -80,7 +81,6 @@ describe('ApiServiceTest', () => {
         fail
       );
       const req = httpTestingController.expectOne(apiService.countryUrl);
-
       //respond with 404 and the error message in the body
       const msg = 'deliberate 404 error';
       req.flush(msg, {status: 404, statusText: 'Not Found'});

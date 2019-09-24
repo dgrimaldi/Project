@@ -6,12 +6,6 @@ import {Country} from "../api-service/country";
 import {ApiService} from "../api-service/api.service";
 import {TokenService} from "../tokens-service/token.service";
 
-import { getTestBed } from '@angular/core/testing';
-import {
-  BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting
-} from '@angular/platform-browser-dynamic/testing';
-
 @Component({
   selector: 'app-issue-modal',
   templateUrl: './issue-modal.component.html',
@@ -24,6 +18,7 @@ export class IssueModalComponent implements OnInit {
   private error: any;
   private isValid: boolean;
   private months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Set', 'Oct', 'Nov', 'Dec'];
+
 
   /**
    * @param {MatDialogRef<IssueModalComponent>} modalRef Reference to a dialog opened via the MatDialog service.
@@ -54,7 +49,7 @@ export class IssueModalComponent implements OnInit {
    * which is easier and safer to consume
    */
 
-  showCountries() {
+   showCountries() {
     this.apiService.getCountries()
       .subscribe(
         // clone the data object, using its known Config shape
@@ -62,7 +57,9 @@ export class IssueModalComponent implements OnInit {
         //HttpClient return object when there is an error object instead of successful response.
         error => this.error = error
       );
+    console.log(this.apiService.getCountries());
   }
+
 
   /**
    * it checks if all fields are corrected, create an object Token,
