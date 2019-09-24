@@ -30,6 +30,7 @@ export class ApiService {
       .pipe(
         retry(3), // retry a failed request up to 3 times
         catchError(this.handleErrorTest('getCountries', [])) // then handle the error
+        // catchError(this.handleError)
       );
   }
 
@@ -63,6 +64,7 @@ export class ApiService {
     this.messages.push(message);
   }
 
+  // Get Errors
   public getErrorMessages() {
     return this.messages;
   }

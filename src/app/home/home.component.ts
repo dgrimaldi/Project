@@ -30,8 +30,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tokens = this.tokenService.getTokens();
+
+    // Call to storageAvailable of ServiceToken that checks if the storage is available or not
     this.thereIsStorage = this.tokenService.storageAvailable('localStorage');
+    this.tokens = this.tokenService.getTokens();
+
   }
 
   /**
@@ -39,7 +42,7 @@ export class HomeComponent implements OnInit {
    *  config object. The open method will return an instance of MatDialogRef
    *  If the local storage is not accessible an alert is displayed
    */
-  openModal(): void {
+  private openModal(): void {
     if (this.thereIsStorage) {
       const modalRef = this.modal.open(IssueModalComponent, {
         width: '600px'
@@ -62,16 +65,17 @@ export class HomeComponent implements OnInit {
    * then update the tokens array for update the view
    * @param {number} key is the identifier in the storage
    */
-  removeToken(key: number) {
+  private removeToken(key: number) {
     this.tokenService.removeToken(key);
     this.tokens = this.tokenService.getTokens();
   }
 
   /**
-   *
-   * @param {string} query
+   *  implements filter() method that creates a new array with all elements that pass the
+   * test implemented by query. If query is equal to '' then the function displays all tokens
+   * @param {string} query is the string passed by
    */
-  search(query: string) {
+  private search(query: string) {
     if (query != '' && query.length >= 3) {
       this.tokens = this.tokens.filter(token => token.name.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) !== -1);
     } else if (query == '') {

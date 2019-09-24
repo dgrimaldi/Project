@@ -22,7 +22,7 @@ export class Token {
     this.creationDate = creationDate;
     this.issuerName = issuerName;
     this.template = template;
-    this.id = null;
+    this.id = 0;
 
   }
 
