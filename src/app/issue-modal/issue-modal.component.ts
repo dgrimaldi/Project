@@ -6,6 +6,12 @@ import {Country} from "../api-service/country";
 import {ApiService} from "../api-service/api.service";
 import {TokenService} from "../tokens-service/token.service";
 
+import { getTestBed } from '@angular/core/testing';
+import {
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting
+} from '@angular/platform-browser-dynamic/testing';
+
 @Component({
   selector: 'app-issue-modal',
   templateUrl: './issue-modal.component.html',
@@ -88,6 +94,8 @@ export class IssueModalComponent implements OnInit {
       this.modalRef.close(); // close the modal
     }
   }
+
+  // First, initialize the Angular testing environment.
 
 }
 
