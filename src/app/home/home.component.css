@@ -1,8 +1,13 @@
 .my-header{
   padding-left: 1%;
+  margin-top: 2%;
+}
+.my-search{
+  padding-left: 1%;
 }
 .main-layout{
   margin: 0 2% 0 2%;
+  background-color: #001529;
 }
 .my-color{
   color: white;
@@ -17,4 +22,8 @@
 th{
   color: white;
   background-color: #001529;
+}
+.my-icon{
+  height: 20px;
+  width: 20px;
 }

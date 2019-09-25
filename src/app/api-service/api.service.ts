@@ -2,38 +2,66 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {Country} from "./country";
 import {catchError, retry} from "rxjs/operators";
-import {Observable, throwError} from "rxjs/index";
+import {Observable, of, throwError} from "rxjs/index";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private countryUrl = 'https://restcountries.eu/rest/v2/all';
+  countryUrl = 'https://restcountries.eu/rest/v2/all';
+
+
+  /** Creation of array of messages */
+  messages: string[] = [];
+
 
   constructor(private http: HttpClient) {
   }
 
+
+  /**
+   * implemetation of HttpClient.get() to fetch information from the server
+   * @returns {Observable<Country[]>} an observable array of Country
+   */
   getCountries(): Observable<Country[]> {
+    //this.test();
+    //specify that interface as the HttpClient.get() call's type parameter in the service.
     return this.http.get<Country[]>(this.countryUrl)
       .pipe(
-        retry(3),
-        catchError(this.handleError)
+        retry(3), // retry a failed request up to 3 times
+        catchError(this.handleErrorTest('getCountries', [])) // then handle the error
+        // catchError(this.handleError)
       );
   }
 
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
-    }
-    // return an observable with a user-facing error message
-    return throwError(
-      'Something bad happened; please try again later.');
+
+  /**
+   * Returns a function that handles Http operation failures.
+   * This error handler lets the app continue to run as if no error occurred.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  handleErrorTest<T>(operation = 'operation', result = {} as T) {
+
+    return (error: HttpErrorResponse): Observable<T> => {
+
+      const message = (error.error instanceof ErrorEvent) ?
+        error.error.message :
+        'server returned code ' + error.status + ' with body ' + error.error;
+
+      this.printErrorMessages(operation + ' failed: ' + message);
+      console.error(error.error);
+
+      // Let the app keep running by returning a safe result.
+      return of(result);
     };
+
   }
+  // Add message to an array of error messages and show all messagess error
+  private printErrorMessages(message: string) {
+    this.messages.push(message);
+    console.log(this.messages);
+  }
+
+
+}

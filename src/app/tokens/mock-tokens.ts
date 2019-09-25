@@ -12,5 +12,6 @@ export const TOKENS: Token[] = [{
   totalSupply: 100000,
   creationDate: '17 May 2019',
   issuerName: 'Taurus Group SA',
-  template: 'ERC20'
+  template: 'ERC20',
+  id: 0
 }];

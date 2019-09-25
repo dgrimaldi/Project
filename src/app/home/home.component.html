@@ -2,16 +2,20 @@
   <nz-header class="my-header">
     <h1 class="my-color">Token List</h1>
   </nz-header>
-  <nz-header class="my-header">
+  <nz-header class="my-search">
     <div nz-row>
       <div nz-col [nzSpan]="7" [nzPush]="17">
-        <button class="my-button" nz-button nzType="primary" (click)="openModal()" routerLink="issue-token">Isuee Token</button>
+        <button class="my-button" nz-button nzType="primary" (click)="openModal()" routerLink="issue-token">Isuee
+          Token
+        </button>
         <button class="my-button" nz-button nzType="dashed"><i nz-icon nzType="download"></i>Export to CSV
         </button>
       </div>
       <div nz-col [nzSpan]="17" [nzPull]="7">
         <nz-input-group [nzPrefix]="prefixIconSearch">
-          <input type="text" nz-input placeholder="Contract name or address or ticker">
+          <input type="text" nz-input placeholder="Contract name or address or ticker"
+                 [(ngModel)]="searchToken"
+                 (input)="search(searchToken)">
         </nz-input-group>
         <ng-template #prefixIconSearch>
           <i nz-icon nzType="search"></i>
@@ -20,8 +24,8 @@
     </div>
   </nz-header>
   <nz-layout>
-
-    <nz-table class="my-color" #tokenListTable [nzData]="tokens" nzTemplateMode="dark">
+    <nz-table [nzPageIndex]="1" [nzTotal]="4" [nzShowTotal]="4" class="my-color" #tokenListTable [nzData]="tokens"
+              *ngIf="thereIsStorage; else error">
       <thead>
       <tr>
         <th nzWidth="10%" class="my-color">Token Name</th>
@@ -31,7 +35,7 @@
         <th nzWidth="10%" class="my-color">Issuer name</th>
         <th nzWidth="10%" class="my-color">Template</th>
         <th class="my-color"></th>
-        <th nzWidth="8%" class="my-color" [nzAlign]="">Actions</th>
+        <th nzWidth="15%" class="my-color" style="padding-left: 5.5%">Actions</th>
       </tr>
       </thead>
       <tbody class="my-color">
@@ -44,10 +48,17 @@
         <td>{{token.template}}</td>
         <td></td>
         <td align="center">
-          <i nz-icon nzType="delete" nzTheme="outline"></i>
+          <a (click)="removeToken(token.id)">
+            <i nz-icon class="my-icon" nzType="delete" nzTheme="outline"></i>
+          </a>
         </td>
       </tr>
       </tbody>
     </nz-table>
   </nz-layout>
 </nz-layout>
+
+<ng-template #error>
+  <nz-result style="width: 100%" nzStatus="warning" nzTitle="There are some problems with Local Storage">
+  </nz-result>
+</ng-template>

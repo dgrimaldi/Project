@@ -8,6 +8,7 @@ export class Token {
   creationDate: string;
   issuerName: string;
   template: string;
+  id: number;
 
   constructor(name: string,
               ticker: string,
@@ -21,6 +22,7 @@ export class Token {
     this.creationDate = creationDate;
     this.issuerName = issuerName;
     this.template = template;
+    this.id = 0;
 
   }
 
