@@ -44,14 +44,12 @@ export class ApiService {
   handleErrorTest<T>(operation = 'operation', result = {} as T) {
 
     return (error: HttpErrorResponse): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
-      // console.error(error); // log to console instead
 
       const message = (error.error instanceof ErrorEvent) ?
         error.error.message :
         'server returned code ' + error.status + ' with body ' + error.error;
 
-      this.addErrorMessage(operation + ' failed: ' + message);
+      this.printErrorMessages(operation + ' failed: ' + message);
       console.error(error.error);
 
       // Let the app keep running by returning a safe result.
@@ -59,14 +57,10 @@ export class ApiService {
     };
 
   }
-  // Save an array of error
-  private addErrorMessage(message: string) {
+  // Add message to an array of error messages and show all messagess error
+  private printErrorMessages(message: string) {
     this.messages.push(message);
-  }
-
-  // Get Errors
-  public getErrorMessages() {
-    return this.messages;
+    console.log(this.messages);
   }
 
 

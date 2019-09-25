@@ -7,15 +7,15 @@
   <div nz-col [nzSpan]="18" [nzPush]="6">
     <router-outlet></router-outlet>
   </div>
-    <div class="menu-div my-menu" nz-col [nzSpan]="6" [nzPull]="18">
-      <img src="../assets/logo.png" class="my-img">
-      <ul class="my-menu" nz-menu nzMode="inline" [nzTheme]="">
-        <li  nz-menu-item nz-tooltip nzPlacement="right" nzTitle="Issue Token" routerLinkActive="active">
-          <i nz-icon nzType="plus"></i>
-          <span>Issue Token</span>
-        </li>
-        <li nz-submenu nzTitle="Token List" nzIcon="unordered-list" routerLink="/token-list/issue-token" routerLinkActive="active">
-        </li>
-      </ul>
-    </div>
+  <div class="menu-div my-menu" nz-col [nzSpan]="6" [nzPull]="18">
+    <img src="../assets/logo.png" class="my-img">
+    <ul class="my-menu" nz-menu nzMode="inline" [nzTheme]="">
+      <li nz-menu-item nz-tooltip nzPlacement="right" nzTitle="Issue Token">
+        <i nz-icon nzType="plus"></i>
+        <span>Issue Token</span>
+      </li>
+      <li nz-submenu nzTitle="Token List" nzIcon="unordered-list">
+      </li>
+    </ul>
+  </div>
 </div>

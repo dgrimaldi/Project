@@ -55,9 +55,8 @@ export class IssueModalComponent implements OnInit {
         // clone the data object, using its known Config shape
         countries => this.countries = countries,
         //HttpClient return object when there is an error object instead of successful response.
-        error => this.error = error
+        error => this.error = error,
       );
-    console.log(this.apiService.getCountries());
   }
 
 
