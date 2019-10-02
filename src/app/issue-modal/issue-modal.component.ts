@@ -50,13 +50,17 @@ export class IssueModalComponent implements OnInit {
    */
 
   showCountries() {
-    this.apiService.getCountries()
-      .subscribe(
-        // clone the data object, using its known Config shape
-        countries => this.countries = countries,
-        //HttpClient return object when there is an error object instead of successful response.
-        error => this.error = error,
-      );
+    // this.apiService.getCountries()
+    //   .subscribe(
+    //     // clone the data object, using its known Config shape
+    //     countries => this.countries = countries,
+    //     //HttpClient return object when there is an error object instead of successful response.
+    //     error => this.error = error,
+    //   );
+    this.apiService.getCountries().toPromise().then(res => {
+      this.countries = res;
+    }).catch(error =>
+      this.error = error);
   }
 
 
